@@ -1,0 +1,38 @@
+REMOÇAO EM ARVORE BINARIA DE BUSCA
+
+remove(tno * &ptarv, int x)
+pai, pt = busca(ptarv, x) // busca que retorna o pai
+se(pt == NULL)
+    Nao achei. Sinto muito;
+    tchau;
+    return
+//remover chave de pt
+nfilhos = 0; ptfilho = NULL
+se pt->esq != NULL
+    nfilhos++; ptfilho=pt->esq
+se pt->dir != NULL
+    nfilhos++; ptfilho=pt->dir
+se nfilhos < 2
+    se pai == NULL
+        ptarv = ptfilho
+    senao
+        se pai->esq == pt
+            pai->esq =ptfilho
+        senao
+            pai->dir = ptfilho
+    free(pt);
+    senao //tratar o caso que no nfilhos=2
+        pai = pt
+        succ = pt->dir
+        enquanto succ->esq != NULL
+            pai =succ 
+            succ = succ->esq
+        pt->chave =- succ->chave
+        se pai->dir == succ
+            pai->dir = succ->dir
+        senao
+            pai->esq = succ->dir
+        free(succ)
+
+ARVORE BINARIA DE BUSCA OTIMA
+

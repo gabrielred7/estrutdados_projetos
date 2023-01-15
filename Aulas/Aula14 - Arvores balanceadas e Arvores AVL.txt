@@ -1,0 +1,114 @@
+ARVORE BALANCEADAS
+
+Usamos um algoritmo que era achar a arvore otima.
+Porque pode occorer de acabarmos com uma arvore assim:
+
+10
+  |
+  20
+   |
+   30
+  |
+ 21
+  |
+  23
+
+Uma arvore de altura grande e nao completa.
+
+É uma boa diminuir a altura
+
+    21
+   |  |
+  20  30
+  |    |
+  10   23
+
+Se tiver n chaves, qual a menor altura que podemos ter?
+
+arvore completa de altura h
+ou arvore binaria qualquer de altura h
+
+    *
+  |   | 
+  *   *
+ | | | |
+ * * * *
+
+2**h - 1 -> chaves no maximo (acontece se arvore é cheia)
+
+n <= 2**h-1
+2**h >= n+1
+h >= log2(n+1)
+
+gostaria que para qualquer ordem de entrada de n chaves para serem inseridas em uma arvore binaria de busca, que a altura fosse log2(n+1), que é a melhor possivel
+
+    5
+  |   |
+  3   7
+ | | |
+ 2 4 6
+ |
+ 1
+
+O(n)
+ ->
+
+     4
+   |   |
+   2   6
+  | | | |
+  1 3 5 7
+
+Para fazer a insercao de uma chave foi necessario reorganizar toda a arvore, entao esse metodo nao serve. Nao é possivel manter uma arvore com h = log2(n+1) gastando um tempo pequeno. Ou seja, com o tempo proposional a altura e manter a arvore otima.
+
+Desejamos entao a alt O(log2(n)) ao inves de simplesmente log2(n+1)
+
+Uma arvore T é dita balanceada se para todo nó v em T, a sub-arvore Tv de raiz v tem altura O(log|Tv|)
+
+Um nó v de uma arvore T é regulado/equilibrado se h(Tesq(v)) - h(Tdir(v)) <= 1
+
+regulagem(v) = h(Tesq(v)) - h(Tdir(v))
+
+Uma arvore T é dita AVL se todo nó de T é regulado e T tem que ser uma arvore binaria de busca
+
+Lema: Se T é AVL => T é balanceada
+
+Note que se T é AVL, entao T(v) é subarvore de T com raiz v (e todos seus descendentes) tambem é AVL
+
+Portanto para verificar que T AVL é balanceada, basta verificar que h(T) = O(log|T|) ie, nao preciso olhar as subarvore, pois eles tambem sao raizes arvores AVL.
+
+Qual é o numero de nós e a 'cara' da menor arvore AVL com altura h?
+
+h = 2         h = 3
+   *            *
+  | |          | |
+  * *          * *
+               |
+               *
+
+h(T) = 1 + MAX(h(Tesq), h(Tdir))
+
+N(0) = 0
+N(1) = 1
+N(2) = 2
+N(h) = 1 + N(h-1) + N(h-2)
+
+Se T é AVL com altura h n = |T| >= N(h) >= 1/sqrt(5) * a^h
+
+a**h <= n*sqrt(5)
+h <= loga(n*sqrt(5)) = O(logn)
+
+Rotação simples para direita para obter a regulagem da arvore
+
+      b                a
+    |   |     ->      |  |
+    a   T3           T1  b
+   | |                  | |
+  T1 T2                T2 T3
+
+rotacaoEsq(tno * &ptraiz)
+ptb = ptraiz->dir
+ptraiz->dir = ptb->esq
+ptb->esq = ptraiz
+ptraiz = ptb
+

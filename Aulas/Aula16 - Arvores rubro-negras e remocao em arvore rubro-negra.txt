@@ -1,0 +1,34 @@
+Trabalho 3
+
+Implementar uma arvore AVL
+
+Entrada
+i num
+p
+
+i 5
+i 8
+p
+i 13
+i 10
+p
+
+Saida [chave(h) em pre-ordem]
+5(2) 8(1)
+8(3) 5(1) 12(2) 10(1)
+
+p imprime chaves e altura do no da chave, em pre-ordem
+
+a altura deve ser um campo da arvore, entao pode percorrer a arvore toda p/ calcular a altura // n tem ponteiro para pai
+
+main()
+...
+while(!feof(stdin)){
+        if(scanf("%s", str) == 1){
+            if(str[0] == 'p')
+                imprime(); //vai imprimir em preordem
+            if(str[0] == 'i')
+                if(scanf('%d', num) == 1)
+                    insere(ptraiz, num);
+        }
+    }

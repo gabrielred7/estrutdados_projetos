@@ -1,0 +1,10 @@
+HEAP BINOMIAL COM AVALIAÇÃO TARDIA
+(LAZY EVALUATION)
+
+2 - 6 - 25 - 15 - 7
+-> lista encadeada que contem todas as arvores
+
+quero remover o minimo, antes tem que organizar a arvore
+
+fazemos isso criando um vetor que guarda ponteiros para esses nós
+

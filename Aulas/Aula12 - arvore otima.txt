@@ -1,0 +1,40 @@
+Arvore otima
+
+É necessario um algoritmo que minimize o custo da Arvore
+
+Ex:
+10 <- f=15
+|    |
+0    42     <- f=12
+    |  |
+    25      <- f=10
+    | |
+    15      <- f=7
+    | |
+
+custoF(t) = 15*1 + 12*2 + 10*3 + 7*4 
++ 2*1 + 1*4 + 0*4 +3*3 + 2*2
+
+Formula do custo da arvore otima
+
+custo(T) = C(Tesq) + C(Tdir) + somatorio(Fi) + somatorio(F'i)
+
+com isso conseguimos criar o algoritmo da arvore otima com um dado numero de chaves
+
+O algoritmo nao sabe qual e a melhor raiz, mas se tiver, e feito um calculo menor para calcular a arvore otima
+
+C(i, j) = custo da arvore otima com chaves i+1...j
+
+Desejo C(0, n) < chaves 1 até n, e externos 0 ate n
+
+necessario uma formula para calcular isso no algoritmo 
+
+Tesq = (i, k-1)
+Tdir = (k, j)
+
+C(i, j) = Min (k=i+1 -> j) C(i, k-1) + C(k, j) + somatorio(Fi) + somatorio(F'i)  //exemplo em papel
+
+formula do custo que eu tenho para uma raiz k, que ira tentar todas as raizes possiveis
+
+ 
+

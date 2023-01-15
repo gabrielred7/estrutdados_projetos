@@ -1,0 +1,99 @@
+Heap binaria
+
+        3          
+      /   \        O(logn)   |3|7|6|15|12|11|9|...|
+     7     6
+    / \   / \
+   15 12 11  9
+
+Insere(heap, tem, nElem, x)
+se nElem == tam
+    overflow(...)
+se nElem < tam
+    heap[nElem] = x
+    subir(nElem)
+    nElem++
+
+//recursivo
+subir(heap, pos)
+se pos!=0
+    pai = PAI(pos)
+    se heap[pai] > heap[pos]
+        tmp = heap[pos]
+        heap[pos] = heap[pai]
+        heap[pai] = tmp
+        subir(pai)
+
+//nao recursivo
+subir(heap, pos)
+valor = heap[pos]
+enquanto pos!=0
+    pai = PAI(pos)
+    se heap[pai] > valor
+        heap[pos] = heap[pai]
+        pos = pai
+    senao
+        break //sai do loop
+heap[pos] = valor
+
+removeMin(heap, nElem)
+se nElem > 0
+    nElem = nElem - 1
+    x = heap[0]
+    heap[0] = heap[nElem]
+    descer(heap, 0)
+
+descer(heap, nElem, pos)
+posFilho = Fesq(pos)
+se posFilho < nElem
+    posFilhoDir = posFilho + 1
+    se posFilhoDir < nElem
+        se heap[posFilhoDir] < heap[posFilho]
+            posFilho = posFilhoDir
+    se heap[pos] > heap[posFilho]
+        tmp = heap[pos]
+        heap[pos] = heap[posFilho]
+        heap[posFilho] = tmp
+        descer(heap, nElem, posFilho)
+
+        13
+      /    \
+    15      20
+   /
+  18
+
+|3|2|8|10|7|1|12|...|
+
+heapify(vetor, tam, nElem)
+nElemHeap = 0
+para i de 0 ate nElem - 1
+    insere(vetor, tam, nElemHeap, vetor[i])
+
+heapify(vetor, nElem)
+para i de 0 ate nElem - 1
+    subir(i)
+
+         1
+       /   \
+     8      2
+    / \    / \
+   12  10 7   3
+  /
+ 15
+
+|1|8|2|12|10|7|3|15  
+
+heapfy(vetor, nElem)                        O(n)
+for(i = PAI(nElem-1); i >= 0; i--)
+    descer(vetor, nElem, i)
+
+// ordenando o vetor de uma heap
+heapSort(vetor, nElem)
+heapify(vetor,nElem)
+pos = nElem - 1
+enquanto pos > 0
+    valor = vetor[0]
+    vetor[0] = vetor[pos]
+    descer(vetor, 0, pos)
+    pos--
+

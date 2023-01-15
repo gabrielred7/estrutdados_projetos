@@ -1,0 +1,45 @@
+HEAP BINOMIAL
+
+É uma coleção de arvores binomiais de ordem distintas, tal qual todo nó obedece a propriedade heap.
+
+A ordem de uma arvore é o # de filhos de raiz.
+
+Árvores binomiais
+
+B0      B1      B2      B3
+*       *       *        *
+       /       / \     / \  \
+      *       *   *   *   *  *
+                         /  /  \
+                        *  *    * a mais a direita é subordinada
+
+        3         15           3             2              2
+      +     +    /       =    / \      +   /  \   =     /  \   \
+    8          30            8   15       12   7       12   7   3
+                                 /            /            /   / \
+                                30           11          11   8  15
+                                                                /
+                                                               30
+
+Com pt p/ ultimo filho consigo implementar subordinçao em O(i)
+
+|Bi| = 2^i <= n -> i <= log2(n)
+
+Custo da inseção = O(log2(n))
+Ache min = O(1)
+
+                heap binaria        heap binomial
+insere              O(logn)             O(logn)
+remove min          O(logn)             O(logn)
+ache min            O(1)                 O(1)
+merge               O(n)                O(logn)
+
+queremos agora melhorar a complexidade do insere do heap binomial:
+
+1 opçao: considerar complexidade amortizada
+
+considere seguintes dimensões em heap binomial
+inicialmente vazia
+uma insercao custa O(logn)
+a sequencia de n inserções custara apenas O(n) < O(logn)
+

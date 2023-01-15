@@ -1,0 +1,143 @@
+Árvore -> grafo conexo sem ciclos
+
+Árvore enraizada -> árvore c/ 1 vértice especial chamado de raiz
+    -> posta em representação hierárquica
+
+Uma árvore enraizada é um nó r que é a raiz da árvore, e 1 ou + subconjuntos que também são árvores (enraizadas).
+
+Uma árvore é ou o conjunto vazio ou um nó e 1 ou + subconjuntos que também são árvores.
+
+Ávore pode ser ordenada ou não. O nó de uma árvore não vazia é a raiz da árvore, e os subconjuntos são as subarvores da árvore.
+
+arvore T
+r
+|   | 
+a   b
+    |  |
+    c  d
+
+representa uma árvore c/raiz r, e subarvores A e B.
+
+r é a raiz de T
+Se r é a raiz de T c/ subarvores B, de raiz b, entao r é pai de b e b é filha de r.
+
+Se r é pai de b e b é pai de c -> r é avô de c, e c é neto de r.
+
+Se r é raiz de uma árvore T e x pertence T -> x é descendete de r e r ancestral de x.
+
+OBS: r é ancestral de r!
+
+Se x é descendete de r e x é diferente de r -> x é descendete proprio de r.
+
+r
+|   | 
+a   b
+    |  |
+    c  d
+
+Se c e d são filhos do mesmo pai b, entao c e d são irmaos. Se a é irmao de b, pai de c entao a é tio de c, c é sobrinho de a.
+
+(r (a()) (b(c()) (d())))
+
+Só seram usadas ARVORES ORDENADAS (a ordem dos filhos importa)
+a                  a    
+|  |  diferente de |  |
+b  c               c  b
+
+Uma arvore binaria é um conjunto vazio ou um no e 2 subarvores que tambem sao arvores binarias.
+
+//Árvores sao como listas encadeadas
+typedef struct _tno{
+    struct _tno * esq; //aponta prum no
+    int chave;
+    struct _tno * dir; //aponta prum no
+} tno;
+
+//percorre todos os nos da arvore e imprime
+//o codigo abaixo foi feito por percuso em pre-ordem
+imprime_arvore(tno * ptarv){
+    se ptarv != NULL
+        print ptarv->chave
+        imprime_arvore(ptarv->esq)
+        imprime_arvore(ptarv->dir)
+}
+
+Exemplo:
+      f
+  |       |
+  c       j
+|  |    |   |
+a  e    h   k
+|  |   | |
+b  d   g i
+
+Pré-ordem
+b a d e c g i h k j f
+
+//imprime por nivel
+
+imprime_nivel(ptarv)
+se ptarv != NULL 
+    insereFila(ptarv)
+enquanto fila nao vazia
+    pt = tiraFila()
+    print pt->chave
+    insereFila(ptarv->esq)
+    insereFila(ptarv->dir)
+
+Exercicio: escreva percuso em ordem nao recursivo
+
+Um caminho em uma arvore é uma sequencia de nós da arvore v1, v2, v3, ..., vk tal que v1 é pai ou filho de vi+1
+
+O comprimento de um caminho v1, v2, v3 ..., vk é o numero de arestas do caminho, ie, k-1 
+
+A distancia entre dois nós é o comprimento de menor caminho entre eles.
+
+  *
+|   |       d(a, b) = 5
+*   *
+|   | |
+a     *
+      |
+      b
+
+A altura de uma árvore é a altura de sua raiz.
+A altura da raiz de uma arvore é o numero de nós no maior caminho simples de r a um de seus descendentes.
+
+(caminho simples nao pode repetir arestas e vertices)
+
+  *   <- h=4
+|   |       
+*   *       <- nivel é 4
+|   | |        
+*     *
+     | |
+     * *
+
+O nivel de um nó em uma árvore T é o numero de nos no caminho mais curto da raiz de T até o nó. 
+
+    h
+ |      |
+he      hd
+| |     | |
+* *     * *
+
+L = Max(he, hd) + 1
+
+//como calcular a altura
+if(ptarv == NULL)
+    return 0;
+calculaAltura(ptarv)
+ne = calculaAltura(ptarv->esq)
+nd = calculaAltura(ptarv->dir)
+return ptarv->Alt = Max(he, hd) + 1
+
+Uma arvore binaria é dita estritamente binaria se todo nó tem 0 ou 2 filhos.
+
+Uma árvore binaria tal que todo nó com subarvore vazia esta no ultimo ou penúltimo níveis é dita árvore completa.
+
+se todo nó com subárvores vazia está no ultimo nivel, entao é uma árvore cheia
+
+quantos nós tem árvore cheia de altura h?
+nNos = 2^h -1
+

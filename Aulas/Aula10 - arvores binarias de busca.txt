@@ -1,0 +1,151 @@
+Árvore binaria completa
+
+        *       -> h
+    |       |   
+    *       *
+  |   |   |   |  
+  *   *   *   *
+ | | | | | | | |
+ * * * * * * * *
+
+com todos os nós é uma árvore cheia
+
+nivel 1 - 1
+nivel 2 - 2
+nivel 3 - 2^2
+nivel 4 - 2^3
+nivel 5 - 2^h-1
+
+Lema: arvore binaria cheia de altura h tem n = 2^h - 1 nós.
+
+Prova: em uma árvore cheia o nivel i tem 2^(i-1) chaves (pois o nivel 1 tem 1 chave, e o numero de chaves dobra a cada novo nivel)
+
+Portanto o numero de chaves da arvore é u...
+
+Lema: Seja T uma arvore binaria de altura h. Entao |T| = numero de nos de T <= 2^h - 1.
+
+Prova: A arvore com maior numero de nos e altura h é cheiam, e tem 2^h -1 nós. Portanto T tem no maximo 2^h -1 nós.
+
+Lema: Seja T uma árvore binaria com n nós. Então h(T) <= log2^n.
+
+Prova: n <= 2^h(t) - 1
+       n+1 <= 2^h(t)
+       h(t) >= log2(n+1)
+
+
+
+ÁRVORE BINARIA DE BUSCA
+
+Seja T uma arvore binaria. Se todo nó de T com chave x e subarvores TEsq e TDir é tal que todo y pertencente a TEsq <=x e todo z  pertencente a TDir >= x -> T é uma árvore binaria de busca.
+
+         x
+    |           |
+TEsq <= x  TDir >= x
+
+Exemplo de arvore binaria de busca:
+
+        15
+    |       |
+    10      42
+            |
+            30
+----------------------------
+        25
+    |       |
+    10      33
+   |  |    |  |   h = ordem(log n)
+   1  12  30  42
+              |
+              53
+
+Esperado: Se as chaves são inseridas na árvore em ordem aleatoria -> h=ordem(log n) 
+
+arvore binaria de busca balanceada
+h=ordem(log n)
+
+//codigo arvore binaria de busca balanceada
+init(ptraiz)
+    ptraiz = NULL
+
+imprimeOrdem(ptraiz)
+se ptraiz != NULL
+    imprimeOrdem(ptraiz->esq)
+    print ptraiz->chave
+    imprimeOrdem(ptraiz->dir)
+
+imprimeLaco(ptraiz)
+pt = ptraiz
+enquanto pt != NULL
+    enquanto pt->esq != NULL
+        push(pt)
+        pt = pt->esq
+
+    print pt->chave
+    pt = pt->dir
+    enquanto pilha nao vazia e pt == NULL
+        pt = pop()
+        print pt->chave
+        pt->dir
+
+imprimeLacoSimples(ptraiz)
+push(ptraiz, e)
+enquanto pilha nao vazia
+    pt, direc = pop()
+    se pt != NULL
+        se direc == e
+            push(pt, d)
+            push(pt->esq, e)
+        se direc == d
+            print pt->chave
+            push(pt->dir, e)
+
+busca(ptraiz, x)
+se ptraiz != NULL
+    se ptraiz->chave == x
+        return T
+    se x < ptraiz->chave
+        return busca(ptraiz->esq, x)
+    senao
+        return busca(ptraiz->dir, x)
+
+//busca nao recursivo
+busca(ptraiz, x)
+pt = ptraiz
+pai = NULL
+enquanto pt != NULL
+    se pt->chave == x
+        return pai, pt
+    pai = pt
+    se x < pt->chave
+        pt = pt->esq
+    senao
+        pt = pt->dir
+
+insere(tno * &ptraiz, int x)
+se ptraiz == NULL
+    ptraiz = malloc(sizeof(tno));
+    ptraiz->esq = ptraiz->dir = NULL
+    ptraiz->chave = x
+    return
+se ptraiz->chave == x
+    ja consta
+    return
+se x < ptraiz->chave
+    insere(ptraiz->esq, x)
+senao
+    insere(ptraiz->dir, x)
+
+tno* insere(tno * ptraiz, int x)
+se ptraiz == NULL
+    ptraiz = malloc(sizeof(tno));
+    ptraiz->esq = ptraiz->dir = NULL
+    ptraiz->chave = x
+    return ptraiz
+se ptraiz->chave == x
+    ja consta
+    return
+se x < ptraiz->chave
+    ptraiz->esq = insere(ptraiz->esq, x)
+senao
+    ptraiz->dir = insere(ptraiz->dir, x)
+return ptraiz

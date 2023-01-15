@@ -1,0 +1,61 @@
+PROGRAMAÇÂO DINAMICA
+
+//Exemplos de problemas de programação DINAMICA
+
+//Loopzin que percorre as posicoes de uma tabela na ordem certa
+
+para i de 0 ate n
+    preeche(i) //pos[i, i]
+para diagonal de 1 ate n
+    para i de 0 ate n-i
+        Calcula(i, i+diagonal)
+
+Calcula(i, j)
+    S[i, j] = S[i-1, j] + F[j] + F'[j]
+    CustoMin = C[i, i] + C[i+1, j] + S[i, j]
+    k = i + 1
+    para raiz de i+2 ate j
+        Custo = C[i, r-1] + C[r, j] + S[i, j]
+        se Custo < CustoMin
+            CustoMin = Custo
+            k = r
+    C[i, j] = CustoMin
+    R[i, j] = k
+
+preeche(i)
+Custo[i, i] = F'[i]
+R[i, i] = -1
+S[i, i] = F'[i]
+
+Multiplicação de matrizes
+
+Como se calcula o custo de multiplicar as matrizes
+M1[5x7] M2[7x10] M3[10x2] M4[2x8]
+
+Custo[AxB][BxC] = A*B*C
+
+[5x7] [7x10] [10x2] [2x8]
+          [7x2]
+    [5x2]
+                [5x8]
+7x10x2 = 140
+5x7x2 = 70
+5x2x8 = 80
+        290 -> Melhor Custo
+
+Calcula pelo algoritmo da arvore otima
+
+C[i, j] = Min (k=i -> j-1) C(i, k) + C(k+1, j) + M[i].lin * M[k].col * M[j].col
+
+(M1[3x4] M2[4x5]) M3[5x7]
+    | |
+  lin col
+M[1].lin = 3
+M[1].col = 4
+
+M[2].col = 5
+
+M[3].col = 7
+
+3x5x7
+
